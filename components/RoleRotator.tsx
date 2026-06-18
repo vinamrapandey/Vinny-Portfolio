@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 const ROLES = [
   "Product Manager",
@@ -56,9 +57,11 @@ export default function RoleRotator() {
   return (
     <span className="inline-flex items-center text-accent">
       <span>{text}</span>
-      <span
+      <motion.span
         aria-hidden
-        className="ml-1 inline-block h-[1em] w-[2px] translate-y-[0.1em] animate-pulse bg-accent"
+        className="ml-1 inline-block h-[1em] w-[2px] translate-y-[0.1em] bg-accent"
+        animate={{ opacity: [1, 1, 0, 0] }}
+        transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
       />
     </span>
   );
