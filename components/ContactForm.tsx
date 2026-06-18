@@ -2,7 +2,10 @@
 
 import { useState, type FormEvent } from "react";
 
-type Status = "idle" | "sending" | "sent" | "error";
+type Status = "idle" | "sent";
+
+// Where contact submissions are delivered.
+const CONTACT_EMAIL = "vinamrapandey22@gmail.com";
 
 const REASONS = [
   "Product role",
@@ -14,39 +17,34 @@ const REASONS = [
 export default function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
 
-  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  // No backend: build a pre-filled email and hand off to the visitor's mail
+  // client. They just hit "Send" in their own app — keeps the site fully static.
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setStatus("sending");
 
     const form = e.currentTarget;
     const name = (form.elements.namedItem("name") as HTMLInputElement).value;
-    const email = (form.elements.namedItem("email") as HTMLInputElement)
-      .value;
+    const email = (form.elements.namedItem("email") as HTMLInputElement).value;
     const reason = (form.elements.namedItem("reason") as HTMLSelectElement)
       .value;
     const message = (form.elements.namedItem("message") as HTMLTextAreaElement)
       .value;
 
-    try {
-      const res = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({
-          access_key: process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY,
-          subject: `[Portfolio] ${reason} — ${name}`,
-          name,
-          email,
-          reason,
-          message,
-        }),
-      });
-      const result = await res.json();
-      if (!result.success) throw new Error(result.message ?? "Request failed");
-      setStatus("sent");
-      form.reset();
-    } catch {
-      setStatus("error");
-    }
+    const subject = `[Portfolio] ${reason} — ${name}`;
+    const body = [
+      `Name: ${name}`,
+      `Email: ${email}`,
+      `Reaching out about: ${reason}`,
+      "",
+      message,
+    ].join("\n");
+
+    const mailto = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
+      subject,
+    )}&body=${encodeURIComponent(body)}`;
+
+    window.location.href = mailto;
+    setStatus("sent");
   }
 
   return (
@@ -115,20 +113,15 @@ export default function ContactForm() {
 
       <button
         type="submit"
-        disabled={status === "sending"}
-        className="rounded-md bg-accent px-6 py-3 font-medium text-canvas transition-opacity hover:opacity-90 disabled:opacity-50"
+        className="rounded-md bg-accent px-6 py-3 font-medium text-canvas transition-opacity hover:opacity-90"
       >
-        {status === "sending" ? "Sending..." : "Send message"}
+        Send message
       </button>
 
       {status === "sent" && (
         <p className="text-sm text-accent">
-          Thanks — I&apos;ll get back to you soon.
-        </p>
-      )}
-      {status === "error" && (
-        <p className="text-sm text-amber">
-          Something went wrong. Try emailing me directly instead.
+          Your email app should have opened with the message ready — just hit
+          send. If nothing happened, email me directly at {CONTACT_EMAIL}.
         </p>
       )}
     </form>
