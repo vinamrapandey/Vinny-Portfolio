@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 // The repo the admin commits posts into. Update if the repo is renamed.
 const REPO_OWNER = "vinamrapandey";
-const REPO_NAME = "Personal-Site";
+const REPO_NAME = "Vinny-Portfolio";
 const BRANCH = "main";
 
 type Status =
