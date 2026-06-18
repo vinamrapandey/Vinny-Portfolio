@@ -5,20 +5,21 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        canvas: "#10141C",
-        surface: "#1B212C",
-        accent: "#6FD6E8",
-        amber: "#F2A65A",
-        ink: "#EDEEF0",
-        muted: "#8B93A1",
+        canvas: "#EBEAE6", // page background — warm light gray
+        surface: "#FFFFFF", // cards
+        ink: "#0F0F0F", // near-black text
+        muted: "#8A8A85", // secondary / gray heading words
+        line: "rgba(15, 15, 15, 0.10)", // hairline borders
+        dark: "#0E0E0E", // dark sections (contact, footer)
+        accent: "#FF5436", // orange highlight, used sparingly
       },
       fontFamily: {
         display: ["var(--font-space-grotesk)", "sans-serif"],
-        body: ["var(--font-ibm-plex-sans)", "sans-serif"],
-        mono: ["var(--font-ibm-plex-mono)", "monospace"],
+        body: ["var(--font-inter)", "sans-serif"],
+        accent: ["var(--font-instrument)", "serif"],
       },
       maxWidth: {
-        content: "1100px",
+        content: "1080px",
       },
     },
   },

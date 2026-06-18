@@ -1,94 +1,83 @@
+import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
-import About from "@/components/About";
+import LogoMarquee from "@/components/LogoMarquee";
 import WorkGrid from "@/components/WorkGrid";
-import SkillsGrid from "@/components/SkillsGrid";
+import About from "@/components/About";
+import Services from "@/components/Services";
+import Process from "@/components/Process";
 import ContactForm from "@/components/ContactForm";
+import Footer from "@/components/Footer";
 
-// TODO: confirm these before launch — placeholders pending real profile URLs.
-const SOCIALS = {
-  email: "mailto:vinamrapandey22@gmail.com",
-  linkedin: "#",
-  github: "#",
-};
-
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+const CONTACT_EMAIL = "vinamrapandey22@gmail.com";
 
 export default function Home() {
   return (
-    <main>
-      <Hero />
-      <About />
-      <WorkGrid />
-      <SkillsGrid />
+    <>
+      <Nav />
+      <main>
+        <Hero />
+        <LogoMarquee />
+        <WorkGrid />
+        <About />
+        <Services />
+        <Process />
 
-      <section id="connect" className="px-6 py-24 sm:px-10">
-        <div className="mx-auto w-full max-w-content">
-          <h2 className="font-display text-3xl font-semibold sm:text-4xl">
-            Connect
-          </h2>
-          <p className="mt-2 text-muted">
-            Open to product, brand, vibe coding, and AI consulting work.
-          </p>
+        {/* Dark contact section */}
+        <section id="contact" className="px-4 py-12 sm:px-6">
+          <div className="mx-auto w-full max-w-content rounded-[2rem] bg-dark p-8 text-canvas sm:p-14">
+            <p className="text-center font-accent text-xl italic text-white/60">
+              Contact
+            </p>
+            <h2 className="mt-2 text-center font-display text-3xl font-semibold tracking-tight sm:text-5xl">
+              Get in touch
+            </h2>
+            <p className="mx-auto mt-3 max-w-md text-center text-sm text-white/60">
+              Open to product, brand, vibe coding, and AI consulting work. Tell
+              me a little about what you&apos;re building.
+            </p>
 
-          <div className="mt-10 grid gap-12 md:grid-cols-[1fr_280px]">
-            <ContactForm />
+            <div className="mx-auto mt-10 max-w-xl">
+              <ContactForm />
+            </div>
 
-            <div className="space-y-8">
-              <div>
-                <h3 className="font-mono text-xs uppercase tracking-[0.2em] text-muted">
-                  Resume
-                </h3>
-                <a
-                  href={`${basePath}/resume.pdf`}
-                  download
-                  className="mt-3 inline-block rounded-md border border-muted/40 px-4 py-2 text-sm text-ink transition-colors hover:border-accent hover:text-accent"
+            <div className="mx-auto mt-6 grid max-w-xl gap-4 sm:grid-cols-2">
+              <a
+                href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
+                  "Let's book a call",
+                )}`}
+                className="group flex items-center justify-between rounded-2xl border border-white/10 bg-white/5 px-5 py-4 transition-colors hover:border-white/30"
+              >
+                <span className="text-sm">
+                  <span className="block text-white/50">Talk to me</span>
+                  <span className="font-medium">Book a call</span>
+                </span>
+                <span
+                  aria-hidden
+                  className="text-white/60 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                 >
-                  Download résumé
-                </a>
-              </div>
-
-              <div>
-                <h3 className="font-mono text-xs uppercase tracking-[0.2em] text-muted">
-                  Elsewhere
-                </h3>
-                <ul className="mt-3 space-y-2 text-sm">
-                  <li>
-                    <a href={SOCIALS.email} className="text-ink hover:text-accent">
-                      Email
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href={SOCIALS.linkedin}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-ink hover:text-accent"
-                    >
-                      LinkedIn
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href={SOCIALS.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-ink hover:text-accent"
-                    >
-                      GitHub
-                    </a>
-                  </li>
-                </ul>
-              </div>
+                  ↗
+                </span>
+              </a>
+              <a
+                href={`mailto:${CONTACT_EMAIL}`}
+                className="group flex items-center justify-between rounded-2xl border border-white/10 bg-white px-5 py-4 text-ink transition-opacity hover:opacity-90"
+              >
+                <span className="text-sm">
+                  <span className="block text-ink/50">Email me</span>
+                  <span className="font-medium">{CONTACT_EMAIL}</span>
+                </span>
+                <span
+                  aria-hidden
+                  className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                >
+                  ↗
+                </span>
+              </a>
             </div>
           </div>
-        </div>
-      </section>
-
-      <footer className="border-t border-white/5 px-6 py-8 sm:px-10">
-        <p className="mx-auto w-full max-w-content font-mono text-xs text-muted">
-          Built with Next.js, Tailwind CSS, and Framer Motion.
-        </p>
-      </footer>
-    </main>
+        </section>
+      </main>
+      <Footer />
+    </>
   );
 }

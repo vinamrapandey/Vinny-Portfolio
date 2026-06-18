@@ -7,6 +7,8 @@ export interface Project {
   approach: string;
   stack: string[];
   metric: string;
+  // Brand color used for the project card's poster gradient.
+  color: string;
   liveUrl?: string;
   repoUrl?: string;
   status: "Live" | "In development";
@@ -26,6 +28,7 @@ export const projects: Project[] = [
       "Multi-threaded scheduler running independently of Streamlit's rerun cycle; dual LLM support (Gemini + OpenAI); WordPress publishing integration.",
     stack: ["Python", "Streamlit", "Gemini API", "OpenAI API", "WordPress REST API"],
     metric: "100+ daily active users",
+    color: "#5B6CFF",
     liveUrl: "https://blogassist.streamlit.app",
     status: "Live",
     shipped: "v1.0 — 2024",
@@ -41,6 +44,7 @@ export const projects: Project[] = [
       "Tiered sourcing (free DuckDuckGo → Serper X-Ray search → LinkedIn API), JD parsing, match scoring with visual tags.",
     stack: ["Python", "Streamlit", "Serper API", "PyPDF", "Pandas"],
     metric: "87% match accuracy",
+    color: "#12B3A6",
     liveUrl: "https://hireultra.streamlit.app",
     status: "Live",
     shipped: "v1.0 — 2024",
@@ -57,6 +61,7 @@ export const projects: Project[] = [
       "Local-first storage via Room/SQLite, MVVM architecture, CSV export.",
     stack: ["Kotlin", "Jetpack Compose", "Room/SQLite"],
     metric: "Distributed via GitHub releases, active development",
+    color: "#E8A23B",
     // TODO: add the real repo URL once confirmed.
     status: "In development",
     shipped: "v0.x — In development",
@@ -72,7 +77,8 @@ export const projects: Project[] = [
     approach:
       "Guests submit via WhatsApp or direct upload; admin curates; gallery updates live. Built on Cloudflare's edge (Workers/Hono.js, D1, R2), Supabase auth, Next.js admin portal, vanilla JS guest app. English and Hindi supported.",
     stack: ["Cloudflare Workers", "Hono.js", "D1", "R2", "Supabase", "Next.js"],
-    metric: "Validated through a live production deployment for a real event",
+    metric: "Validated through a live production deployment",
+    color: "#FF5436",
     liveUrl: "https://mimries.com",
     status: "Live",
     shipped: "v1.0 — 2025",
