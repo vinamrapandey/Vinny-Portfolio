@@ -20,7 +20,10 @@ const ibmPlexMono = IBM_Plex_Mono({
   variable: "--font-ibm-plex-mono",
 });
 
-const siteUrl = "https://vinamrapandey.com";
+// TODO: switch to the custom domain (e.g. vinamrapandey.com) once one is wired up.
+const siteUrl = `https://vinamrapandey.github.io${
+  process.env.NEXT_PUBLIC_BASE_PATH ?? ""
+}`;
 const title = "Vinamra Pandey — Four products. One person. Every layer.";
 const description =
   "Product manager, brand strategist, AI consultant, and full-stack builder. I take AI products from blueprint to shipped — alone.";
@@ -29,17 +32,20 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title,
   description,
+  icons: { icon: `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/favicon.png` },
   openGraph: {
     title,
     description,
     url: siteUrl,
     siteName: "Vinamra Pandey",
+    images: ["/og-image.png"],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title,
     description,
+    images: ["/og-image.png"],
   },
 };
 

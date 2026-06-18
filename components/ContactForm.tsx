@@ -19,21 +19,29 @@ export default function ContactForm() {
     setStatus("sending");
 
     const form = e.currentTarget;
-    const data = {
-      name: (form.elements.namedItem("name") as HTMLInputElement).value,
-      email: (form.elements.namedItem("email") as HTMLInputElement).value,
-      reason: (form.elements.namedItem("reason") as HTMLSelectElement).value,
-      message: (form.elements.namedItem("message") as HTMLTextAreaElement)
-        .value,
-    };
+    const name = (form.elements.namedItem("name") as HTMLInputElement).value;
+    const email = (form.elements.namedItem("email") as HTMLInputElement)
+      .value;
+    const reason = (form.elements.namedItem("reason") as HTMLSelectElement)
+      .value;
+    const message = (form.elements.namedItem("message") as HTMLTextAreaElement)
+      .value;
 
     try {
-      const res = await fetch("/api/contact", {
+      const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          access_key: process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY,
+          subject: `[Portfolio] ${reason} — ${name}`,
+          name,
+          email,
+          reason,
+          message,
+        }),
       });
-      if (!res.ok) throw new Error("Request failed");
+      const result = await res.json();
+      if (!result.success) throw new Error(result.message ?? "Request failed");
       setStatus("sent");
       form.reset();
     } catch {

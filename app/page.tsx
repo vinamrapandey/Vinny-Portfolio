@@ -11,6 +11,8 @@ const SOCIALS = {
   github: "#",
 };
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
 export default function Home() {
   return (
     <main>
@@ -37,7 +39,7 @@ export default function Home() {
                   Resume
                 </h3>
                 <a
-                  href="/resume.pdf"
+                  href={`${basePath}/resume.pdf`}
                   download
                   className="mt-3 inline-block rounded-md border border-muted/40 px-4 py-2 text-sm text-ink transition-colors hover:border-accent hover:text-accent"
                 >
