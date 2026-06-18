@@ -20,10 +20,7 @@ const instrumentSerif = Instrument_Serif({
   variable: "--font-instrument",
 });
 
-// TODO: switch to the custom domain (e.g. vinamrapandey.com) once one is wired up.
-const siteUrl = `https://vinamrapandey.github.io${
-  process.env.NEXT_PUBLIC_BASE_PATH ?? ""
-}`;
+const siteUrl = "https://vinamra.dev";
 const title = "Vinamra Pandey — Four products. One person. Every layer.";
 const description =
   "Product manager, brand strategist, AI consultant, and full-stack builder. I take AI products from blueprint to shipped — alone.";
