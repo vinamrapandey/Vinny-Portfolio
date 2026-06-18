@@ -14,6 +14,9 @@ const REASONS = [
   "Collaboration",
 ];
 
+const inputClass =
+  "mt-2 w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder-white/30 outline-none transition-colors focus:border-white/40";
+
 export default function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
 
@@ -24,6 +27,8 @@ export default function ContactForm() {
 
     const form = e.currentTarget;
     const name = (form.elements.namedItem("name") as HTMLInputElement).value;
+    const company = (form.elements.namedItem("company") as HTMLInputElement)
+      .value;
     const email = (form.elements.namedItem("email") as HTMLInputElement).value;
     const reason = (form.elements.namedItem("reason") as HTMLSelectElement)
       .value;
@@ -33,11 +38,14 @@ export default function ContactForm() {
     const subject = `[Portfolio] ${reason} — ${name}`;
     const body = [
       `Name: ${name}`,
+      company ? `Company: ${company}` : null,
       `Email: ${email}`,
       `Reaching out about: ${reason}`,
       "",
       message,
-    ].join("\n");
+    ]
+      .filter(Boolean)
+      .join("\n");
 
     const mailto = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
       subject,
@@ -48,10 +56,10 @@ export default function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5">
-      <div className="grid gap-5 sm:grid-cols-2">
+    <form onSubmit={handleSubmit} className="space-y-4">
+      <div className="grid gap-4 sm:grid-cols-2">
         <div>
-          <label htmlFor="name" className="text-sm text-muted">
+          <label htmlFor="name" className="text-sm text-white/60">
             Name
           </label>
           <input
@@ -59,11 +67,27 @@ export default function ContactForm() {
             name="name"
             type="text"
             required
-            className="mt-2 w-full rounded-md border border-white/10 bg-surface px-4 py-2.5 text-ink outline-none focus:border-accent"
+            placeholder="Your name"
+            className={inputClass}
           />
         </div>
         <div>
-          <label htmlFor="email" className="text-sm text-muted">
+          <label htmlFor="company" className="text-sm text-white/60">
+            Company / business name
+          </label>
+          <input
+            id="company"
+            name="company"
+            type="text"
+            placeholder="Optional"
+            className={inputClass}
+          />
+        </div>
+      </div>
+
+      <div className="grid gap-4 sm:grid-cols-2">
+        <div>
+          <label htmlFor="email" className="text-sm text-white/60">
             Email
           </label>
           <input
@@ -71,55 +95,62 @@ export default function ContactForm() {
             name="email"
             type="email"
             required
-            className="mt-2 w-full rounded-md border border-white/10 bg-surface px-4 py-2.5 text-ink outline-none focus:border-accent"
+            placeholder="you@email.com"
+            className={inputClass}
           />
+        </div>
+        <div>
+          <label htmlFor="reason" className="text-sm text-white/60">
+            Reaching out about
+          </label>
+          <select
+            id="reason"
+            name="reason"
+            required
+            defaultValue=""
+            className={`${inputClass} appearance-none`}
+          >
+            <option value="" disabled className="text-ink">
+              Select one
+            </option>
+            {REASONS.map((reason) => (
+              <option key={reason} value={reason} className="text-ink">
+                {reason}
+              </option>
+            ))}
+          </select>
         </div>
       </div>
 
       <div>
-        <label htmlFor="reason" className="text-sm text-muted">
-          Reaching out about
-        </label>
-        <select
-          id="reason"
-          name="reason"
-          required
-          defaultValue=""
-          className="mt-2 w-full rounded-md border border-white/10 bg-surface px-4 py-2.5 text-ink outline-none focus:border-accent"
-        >
-          <option value="" disabled>
-            Select one
-          </option>
-          {REASONS.map((reason) => (
-            <option key={reason} value={reason}>
-              {reason}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <div>
-        <label htmlFor="message" className="text-sm text-muted">
-          Message
+        <label htmlFor="message" className="text-sm text-white/60">
+          Tell me about your project
         </label>
         <textarea
           id="message"
           name="message"
           required
-          rows={5}
-          className="mt-2 w-full rounded-md border border-white/10 bg-surface px-4 py-2.5 text-ink outline-none focus:border-accent"
+          rows={4}
+          placeholder="Start your message…"
+          className={inputClass}
         />
       </div>
 
       <button
         type="submit"
-        className="rounded-md bg-accent px-6 py-3 font-medium text-canvas transition-opacity hover:opacity-90"
+        className="group flex w-full items-center justify-center gap-1.5 rounded-xl bg-white px-6 py-3.5 text-sm font-medium text-ink transition-opacity hover:opacity-90"
       >
         Send message
+        <span
+          aria-hidden
+          className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+        >
+          ↗
+        </span>
       </button>
 
       {status === "sent" && (
-        <p className="text-sm text-accent">
+        <p className="text-sm text-white/70">
           Your email app should have opened with the message ready — just hit
           send. If nothing happened, email me directly at {CONTACT_EMAIL}.
         </p>

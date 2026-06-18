@@ -9,49 +9,78 @@ const openTo = ["Product", "Brand", "Vibe Coding", "AI Consulting"];
 
 export default function About() {
   return (
-    <section id="about" className="px-6 py-24 sm:px-10">
+    <section id="about" className="px-6 py-20 sm:px-10 sm:py-28">
       <div className="mx-auto w-full max-w-content">
-        <h2 className="font-display text-3xl font-semibold sm:text-4xl">
-          About
-        </h2>
+        <p className="font-accent text-xl italic text-muted">A little about me</p>
 
-        <div className="mt-8 grid gap-12 md:grid-cols-[1.3fr_1fr]">
-          <p className="text-lg leading-relaxed text-muted">
-            I started in computer science, then spent years doing freelance
-            design and web work before taking a full-stack role at Learning
-            Jockey. That path — design instincts paired with engineering
-            chops — is what led me to found{" "}
-            <span className="text-ink">B6 AI</span>, where I now build AI
-            products end to end: brand, frontend, backend, AI integration,
-            and deployment, all under one roof.
-          </p>
-
+        <div className="mt-6 grid gap-12 md:grid-cols-[1.25fr_1fr] md:gap-16">
           <div>
-            <h3 className="font-mono text-xs uppercase tracking-[0.2em] text-muted">
+            <h2 className="font-display text-5xl font-semibold tracking-tight sm:text-7xl">
+              Hi.
+            </h2>
+            <div className="mt-6 space-y-5 text-lg leading-relaxed text-muted">
+              <p>
+                I started in computer science, then spent years doing freelance
+                design and web work before taking a full-stack role at Learning
+                Jockey. That path — design instincts paired with engineering
+                chops — is what led me to found{" "}
+                <span className="text-ink">B6 AI</span>.
+              </p>
+              <p>
+                There I build AI products end to end: brand, frontend, backend,
+                AI integration, and deployment, all under one roof. One person,
+                every layer — from the first blueprint to the shipped product.
+              </p>
+            </div>
+
+            <a
+              href="#contact"
+              className="group mt-8 inline-flex items-center gap-1.5 rounded-full bg-ink px-6 py-3 text-sm font-medium text-canvas transition-opacity hover:opacity-90"
+            >
+              Say hi
+              <span
+                aria-hidden
+                className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              >
+                ↗
+              </span>
+            </a>
+          </div>
+
+          {/* Right column stands in for the inspiration's photo — credentials instead. */}
+          <div className="rounded-3xl border border-line bg-surface p-7">
+            <p className="font-accent text-2xl italic text-ink">
+              Product · Brand · AI · Code
+            </p>
+            <h3 className="mt-6 text-xs font-medium uppercase tracking-[0.18em] text-muted">
               Credentials
             </h3>
             <ul className="mt-4 space-y-3">
               {credentials.map((item) => (
                 <li
                   key={item}
-                  className="border-l-2 border-accent/40 pl-4 text-sm text-ink"
+                  className="border-l-2 border-ink/15 pl-4 text-sm leading-relaxed text-ink"
                 >
                   {item}
                 </li>
               ))}
             </ul>
+
+            <h3 className="mt-7 text-xs font-medium uppercase tracking-[0.18em] text-muted">
+              Open to
+            </h3>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {openTo.map((track) => (
+                <span
+                  key={track}
+                  className="rounded-full border border-line px-3 py-1 text-sm text-ink"
+                >
+                  {track}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
-
-        <p className="mt-10 text-sm text-muted">
-          Open to:{" "}
-          {openTo.map((track, i) => (
-            <span key={track}>
-              <span className="text-accent">{track}</span>
-              {i < openTo.length - 1 ? ", " : ""}
-            </span>
-          ))}
-        </p>
       </div>
     </section>
   );
