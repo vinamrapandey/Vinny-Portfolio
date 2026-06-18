@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 // TODO: confirm these before launch — placeholders pending real profile URLs.
 const SOCIALS = {
   email: "mailto:vinamrapandey22@gmail.com",
@@ -8,10 +10,11 @@ const SOCIALS = {
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 const navLinks = [
-  { label: "Work", href: "#work" },
-  { label: "About", href: "#about" },
-  { label: "Services", href: "#services" },
-  { label: "Contact", href: "#contact" },
+  { label: "Work", href: "/#work" },
+  { label: "About", href: "/#about" },
+  { label: "Services", href: "/#services" },
+  { label: "Journal", href: "/blog" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 export default function Footer() {
@@ -26,12 +29,12 @@ export default function Footer() {
             <ul className="mt-4 space-y-2.5 text-sm">
               {navLinks.map((link) => (
                 <li key={link.href}>
-                  <a
+                  <Link
                     href={link.href}
                     className="text-white/70 transition-colors hover:text-white"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

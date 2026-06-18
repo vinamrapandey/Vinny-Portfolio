@@ -1,35 +1,37 @@
+import Link from "next/link";
+
 const links = [
-  { label: "Work", href: "#work" },
-  { label: "About", href: "#about" },
-  { label: "Services", href: "#services" },
-  { label: "Contact", href: "#contact" },
+  { label: "Work", href: "/#work" },
+  { label: "About", href: "/#about" },
+  { label: "Services", href: "/#services" },
+  { label: "Journal", href: "/blog" },
 ];
 
 export default function Nav() {
   return (
     <header className="sticky top-0 z-50 px-4 pt-4 sm:px-6">
       <nav className="mx-auto flex max-w-content items-center justify-between rounded-full border border-line bg-surface/80 py-2.5 pl-5 pr-2.5 backdrop-blur-md">
-        <a
-          href="#hero"
+        <Link
+          href="/"
           className="font-display text-sm font-semibold tracking-tight"
         >
           Vinamra Pandey
-        </a>
+        </Link>
 
         <div className="hidden items-center gap-7 text-sm text-muted md:flex">
           {links.map((link) => (
-            <a
+            <Link
               key={link.href}
               href={link.href}
               className="transition-colors hover:text-ink"
             >
               {link.label}
-            </a>
+            </Link>
           ))}
         </div>
 
-        <a
-          href="#contact"
+        <Link
+          href="/#contact"
           className="group flex items-center gap-1.5 rounded-full bg-ink px-4 py-2 text-sm font-medium text-canvas transition-opacity hover:opacity-90"
         >
           Start a project
@@ -39,7 +41,7 @@ export default function Nav() {
           >
             ↗
           </span>
-        </a>
+        </Link>
       </nav>
     </header>
   );

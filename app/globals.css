@@ -35,3 +35,74 @@ body {
     animation: none;
   }
 }
+
+/* Blog post typography (no typography plugin — kept minimal and themed). */
+.prose-blog {
+  color: #3a3a38;
+  font-size: 1.05rem;
+  line-height: 1.75;
+}
+.prose-blog > * + * {
+  margin-top: 1.25rem;
+}
+.prose-blog h2 {
+  margin-top: 2.5rem;
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-size: 1.6rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: #0f0f0f;
+}
+.prose-blog h3 {
+  margin-top: 2rem;
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #0f0f0f;
+}
+.prose-blog a {
+  color: #ff5436;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.prose-blog strong {
+  color: #0f0f0f;
+  font-weight: 600;
+}
+.prose-blog ul,
+.prose-blog ol {
+  padding-left: 1.4rem;
+}
+.prose-blog ul {
+  list-style: disc;
+}
+.prose-blog ol {
+  list-style: decimal;
+}
+.prose-blog li + li {
+  margin-top: 0.5rem;
+}
+.prose-blog blockquote {
+  border-left: 3px solid rgba(15, 15, 15, 0.15);
+  padding-left: 1.1rem;
+  font-style: italic;
+  color: #6a6a66;
+}
+.prose-blog code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.9em;
+  background: rgba(15, 15, 15, 0.06);
+  padding: 0.15em 0.4em;
+  border-radius: 0.35rem;
+}
+.prose-blog pre {
+  background: #0e0e0e;
+  color: #ededed;
+  padding: 1.1rem 1.25rem;
+  border-radius: 0.85rem;
+  overflow-x: auto;
+}
+.prose-blog pre code {
+  background: transparent;
+  padding: 0;
+}
