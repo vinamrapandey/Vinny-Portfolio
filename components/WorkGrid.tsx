@@ -14,8 +14,8 @@ export default function WorkGrid() {
           <span className="text-ink">end to end.</span>
         </h2>
         <p className="mx-auto mt-4 max-w-md text-center text-sm text-muted">
-          Four shipped products — brand, frontend, backend, AI, and deployment,
-          all by one builder.
+          Products spanning brand, frontend, backend, AI, and deployment — all
+          by one builder.
         </p>
 
         <div className="mt-12 grid gap-x-6 gap-y-12 sm:grid-cols-2">
